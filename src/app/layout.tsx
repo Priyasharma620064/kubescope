@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { AppShell } from '@/components/layout/app-shell';
+import { TRPCProvider } from '@/lib/trpc-client';
 import './globals.css';
 
 const inter = Inter({
@@ -31,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <AppShell>{children}</AppShell>
+        <TRPCProvider>
+          <AppShell>{children}</AppShell>
+        </TRPCProvider>
       </body>
     </html>
   );
