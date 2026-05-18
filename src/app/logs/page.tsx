@@ -59,7 +59,7 @@ export default function LogsPage() {
   // Update selected container when selected pod changes
   useEffect(() => {
     if (pods && selectedPod) {
-      const pod = pods.find((p) => p.name === selectedPod);
+      const pod = pods.find((p: { name: string; containers?: Array<{ name: string }> }) => p.name === selectedPod);
       if (pod && pod.containers && pod.containers.length > 0) {
         setSelectedContainer(pod.containers[0].name);
       } else {
@@ -205,7 +205,7 @@ export default function LogsPage() {
                   {loadingNamespaces ? (
                     <SelectItem value="loading" disabled>Loading namespaces...</SelectItem>
                   ) : (
-                    namespaces?.map((ns) => (
+                    namespaces?.map((ns: { name: string }) => (
                       <SelectItem key={ns.name} value={ns.name}>{ns.name}</SelectItem>
                     ))
                   )}
@@ -230,7 +230,7 @@ export default function LogsPage() {
                   {loadingPods ? (
                     <SelectItem value="loading" disabled>Loading pods...</SelectItem>
                   ) : pods && pods.length > 0 ? (
-                    pods.map((p) => (
+                    pods.map((p: { name: string }) => (
                       <SelectItem key={p.name} value={p.name}>{p.name}</SelectItem>
                     ))
                   ) : (
@@ -248,7 +248,7 @@ export default function LogsPage() {
                   <SelectValue placeholder="Select Container" />
                 </SelectTrigger>
                 <SelectContent className="bg-neutral-900 border-border/50 text-neutral-200">
-                  {selectedPod && pods?.find((p) => p.name === selectedPod)?.containers?.map((c) => (
+                  {selectedPod && pods?.find((p: { name: string; containers?: Array<{ name: string }> }) => p.name === selectedPod)?.containers?.map((c: { name: string }) => (
                     <SelectItem key={c.name} value={c.name}>{c.name}</SelectItem>
                   )) || (
                     <SelectItem value="none" disabled>No container available</SelectItem>

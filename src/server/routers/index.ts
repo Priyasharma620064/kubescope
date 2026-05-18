@@ -4,10 +4,12 @@
 import { router } from '../trpc';
 import { clusterRouter } from './cluster';
 import { metricsRouter } from './metrics';
+import { yamlRouter } from './yaml';
 
 export const appRouter = router({
   cluster: clusterRouter,
   metrics: metricsRouter,
+  yaml: yamlRouter,
 });
 
 /** Export the router type for client-side type inference */

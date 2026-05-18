@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+import { Progress } from '../../components/ui/progress';
 import {
   AreaChart,
   Area,
@@ -128,12 +128,12 @@ export default function MetricsPage() {
   // Calculate restart stats from pod list for the bar chart
   const podRestarts = pods
     ? pods
-        .filter((p) => p.restartCount > 0)
-        .map((p) => ({
+        .filter((p: { restartCount: number }) => p.restartCount > 0)
+        .map((p: { name: string; restartCount: number }) => ({
           name: p.name.length > 20 ? `${p.name.substring(0, 18)}...` : p.name,
           restarts: p.restartCount,
         }))
-        .sort((a, b) => b.restarts - a.restarts)
+        .sort((a: { restarts: number }, b: { restarts: number }) => b.restarts - a.restarts)
         .slice(0, 6)
     : [];
 
@@ -180,14 +180,14 @@ export default function MetricsPage() {
               <Card key={idx} className="h-40 bg-neutral-900/40 border-border/40 animate-pulse" />
             ))
           ) : (
-            nodes?.map((node) => {
+            nodes?.map((node: { name: string; kubeletVersion: string; roles: string[]; status: string; conditions: Array<{ type: string; status: "True" | "False" | "Unknown" }> }) => {
               // Find matching usage metrics
-              const metrics = nodeMetrics?.find((m) => m.name === node.name);
+              const metrics = nodeMetrics?.find((m: { name: string; timestamp: string; cpuUsage: string; memoryUsage: string; cpuPercent: number; memoryPercent: number }) => m.name === node.name);
               
               // Get pressure types
-              const memPressure = node.conditions.find((c) => c.type === 'MemoryPressure')?.status ?? 'False';
-              const diskPressure = node.conditions.find((c) => c.type === 'DiskPressure')?.status ?? 'False';
-              const pidPressure = node.conditions.find((c) => c.type === 'PIDPressure')?.status ?? 'False';
+              const memPressure = node.conditions.find((c: { type: string; status: "True" | "False" | "Unknown" }) => c.type === 'MemoryPressure')?.status ?? 'False';
+              const diskPressure = node.conditions.find((c: { type: string; status: "True" | "False" | "Unknown" }) => c.type === 'DiskPressure')?.status ?? 'False';
+              const pidPressure = node.conditions.find((c: { type: string; status: "True" | "False" | "Unknown" }) => c.type === 'PIDPressure')?.status ?? 'False';
 
               return (
                 <Card key={node.name} className="border-border/40 bg-neutral-950/40 hover:border-violet-500/20 transition-all duration-300">
