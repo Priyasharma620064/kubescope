@@ -12,10 +12,16 @@ export default function AssistantPage() {
           Rule-based diagnostic engine for debugging cluster issues
         </p>
       </div>
-      <div className="flex items-center justify-center h-[60vh] rounded-lg border border-dashed border-border/50">
+      <div className="flex flex-col items-center justify-center h-[60vh] rounded-lg border border-dashed border-border/50 gap-3">
         <p className="text-muted-foreground text-sm">
-          AI Assistant will be implemented in Commit 6
+          The Diagnostic AI Assistant has been integrated directly into the **Events & Diagnostics Workbench**.
         </p>
+        <a 
+          href="/events" 
+          className="text-sm text-pink-500 hover:text-pink-400 underline font-medium"
+        >
+          Go to Events & Diagnostics →
+        </a>
       </div>
     </div>
   );

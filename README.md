@@ -75,6 +75,30 @@ src/
 └── types/            # Shared TypeScript definitions
 ```
 
+## Docker
+
+You can run KubeScope in a Docker container.
+
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+## Testing
+
+KubeScope uses Vitest for unit testing.
+
+```bash
+# Run tests
+npm test
+```
+
+## CI/CD
+
+A GitHub Actions workflow is configured in `.github/workflows/ci.yml` to automatically lint, test, and build the application on every push to `main`.
+
 ## License
 
 MIT
