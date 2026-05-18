@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Server,
   ScrollText,
@@ -9,6 +11,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { trpc } from '@/lib/trpc-client';
 
 /**
  * Dashboard status card with icon and animated value display.
@@ -19,12 +22,14 @@ function StatusCard({
   subtitle,
   icon: Icon,
   color,
+  loading = false,
 }: {
   title: string;
   value: string | number;
   subtitle: string;
   icon: React.ElementType;
   color: string;
+  loading?: boolean;
 }) {
   return (
     <Card className="border-border/50 bg-card/50 backdrop-blur-sm hover:border-border/80 transition-colors">
@@ -37,7 +42,11 @@ function StatusCard({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold tracking-tight">{value}</div>
+        {loading ? (
+          <div className="h-8 w-16 bg-neutral-800 rounded animate-pulse" />
+        ) : (
+          <div className="text-2xl font-bold tracking-tight">{value}</div>
+        )}
         <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
       </CardContent>
     </Card>
@@ -85,6 +94,10 @@ function ModuleCard({
  * Dashboard home page — cluster overview with status cards and module quick access.
  */
 export default function DashboardPage() {
+  const { data: summary, isLoading } = trpc.metrics.clusterSummary.useQuery(undefined, {
+    refetchInterval: 10000, // Refresh every 10s
+  });
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -99,31 +112,39 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatusCard
           title="Total Pods"
-          value={12}
-          subtitle="3 namespaces"
+          value={summary?.totalPods ?? 0}
+          subtitle={`${summary?.totalNamespaces ?? 0} active namespaces`}
           icon={Layers}
           color="bg-indigo-500/10 text-indigo-400"
+          loading={isLoading}
         />
         <StatusCard
           title="Running"
-          value={9}
-          subtitle="75% of total"
+          value={summary?.runningPods ?? 0}
+          subtitle={
+            summary?.totalPods 
+              ? `${Math.round((summary.runningPods / summary.totalPods) * 100)}% of total` 
+              : '0% of total'
+          }
           icon={Activity}
           color="bg-emerald-500/10 text-emerald-400"
+          loading={isLoading}
         />
         <StatusCard
           title="Pending"
-          value={2}
-          subtitle="Resource constraints"
+          value={summary?.pendingPods ?? 0}
+          subtitle={`${summary?.failedPods ?? 0} failed / crashed pods`}
           icon={Cpu}
           color="bg-amber-500/10 text-amber-400"
+          loading={isLoading}
         />
         <StatusCard
-          title="Warnings"
-          value={3}
-          subtitle="Last 1 hour"
+          title="Warning Events"
+          value={summary?.warningEvents ?? 0}
+          subtitle="Alerts across all namespaces"
           icon={AlertTriangle}
           color="bg-rose-500/10 text-rose-400"
+          loading={isLoading}
         />
       </div>
 
