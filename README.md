@@ -16,10 +16,10 @@ A full-stack Kubernetes operations platform for cluster debugging, observability
 <img src="public/screenshots/01-dashboard.png" width="100%" alt="Dashboard Overview" />
 
 ### 2. Cluster Explorer
-<img src="public/screenshots/02-explorer.png" width="100%" alt="Cluster Explorer" />
+<img src="public/screenshots/02-cluster-explorer.png" width="100%" alt="Cluster Explorer" />
 
 ### 3. Live Logs Explorer
-<img src="public/screenshots/03-logs.png" width="100%" alt="Live Logs Explorer" />
+<img src="public/screenshots/03-live-logs.png" width="100%" alt="Live Logs Explorer" />
 
 ### 4. Metrics Dashboard
 <img src="public/screenshots/04-metrics.png" width="100%" alt="Metrics Dashboard" />
@@ -27,8 +27,8 @@ A full-stack Kubernetes operations platform for cluster debugging, observability
 ### 5. Monaco YAML Studio
 <img src="public/screenshots/05-yaml-studio.png" width="100%" alt="Monaco YAML Studio" />
 
-### 6. Event Timeline
-<img src="public/screenshots/06-events.png" width="100%" alt="Event Timeline" />
+### 6. Events & Diagnostics Workbench
+<img src="public/screenshots/06-events.png" width="100%" alt="Events & Diagnostics Workbench" />
 
 ### 7. AI Cluster Assistant
 <img src="public/screenshots/07-assistant.png" width="100%" alt="AI Cluster Assistant" />
