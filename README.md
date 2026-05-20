@@ -10,6 +10,29 @@ A full-stack Kubernetes operations platform for cluster debugging, observability
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![tRPC](https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white)
 
+## Preview
+
+### 1. Dashboard Overview
+<img src="public/screenshots/01-dashboard.png" width="100%" alt="Dashboard Overview" />
+
+### 2. Cluster Explorer
+<img src="public/screenshots/02-explorer.png" width="100%" alt="Cluster Explorer" />
+
+### 3. Live Logs Explorer
+<img src="public/screenshots/03-logs.png" width="100%" alt="Live Logs Explorer" />
+
+### 4. Metrics Dashboard
+<img src="public/screenshots/04-metrics.png" width="100%" alt="Metrics Dashboard" />
+
+### 5. Monaco YAML Studio
+<img src="public/screenshots/05-yaml-studio.png" width="100%" alt="Monaco YAML Studio" />
+
+### 6. Event Timeline
+<img src="public/screenshots/06-events.png" width="100%" alt="Event Timeline" />
+
+### 7. AI Cluster Assistant
+<img src="public/screenshots/07-assistant.png" width="100%" alt="AI Cluster Assistant" />
+
 ## Features
 
 - 🔍 **Cluster Explorer** — Browse namespaces, pods, deployments, and nodes with real-time status
